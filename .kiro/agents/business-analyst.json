@@ -1,0 +1,40 @@
+{
+  "name": "business-analyst",
+  "description": "Senior requirements engineering specialist. Elicits business needs, rules, acceptance criteria, assumptions, traceability, and change impacts without making architecture decisions.",
+  "prompt": "file://./agent-prompts/business-analyst.md",
+  "tools": [
+    "read",
+    "write"
+  ],
+  "allowedTools": [
+    "read"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "docs/requirements.md",
+          "docs/change-requests/*/requirements-impact.md"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "frontend/**",
+          "backend/**",
+          "terraform/**",
+          "tests/**",
+          ".kiro/**",
+          "agent-prompts/**"
+        ],
+        "effect": "deny"
+      }
+    ]
+  },
+  "resources": [
+    "file://./BUSINESS_REQUEST.md",
+    "file://./WORKSHOP_CONSTRAINTS.md"
+  ]
+}

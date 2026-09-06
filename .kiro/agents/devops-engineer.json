@@ -1,0 +1,79 @@
+{
+  "name": "devops-engineer",
+  "description": "Senior DevOps/platform specialist with Terraform and cloud delivery expertise. Implements infrastructure, prepares reviewed plans, deploys only after approval, and verifies releases.",
+  "prompt": "file://./agent-prompts/devops-engineer.md",
+  "tools": [
+    "read",
+    "write",
+    "shell"
+  ],
+  "allowedTools": [
+    "read"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "terraform/**",
+          "docs/infrastructure-implementation-summary.md",
+          "docs/deployment-plan.md",
+          "docs/release-report.md",
+          "docs/change-requests/*/infrastructure-implementation-summary.md",
+          "docs/change-requests/*/deployment-plan.md",
+          "docs/change-requests/*/release-report.md"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "frontend/**",
+          "backend/**",
+          "tests/**",
+          "docs/requirements.md",
+          "docs/architecture.md",
+          "docs/api-contract.md",
+          "docs/data-model.md",
+          ".kiro/**",
+          "agent-prompts/**"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "terraform fmt*",
+          "terraform init*",
+          "terraform validate*",
+          "terraform plan*",
+          "terraform show*",
+          "terraform output*",
+          "terraform apply*",
+          "curl *",
+          "aws sts get-caller-identity*"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "rm -rf *",
+          "sudo *",
+          "git push*"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "terraform destroy*"
+        ],
+        "effect": "ask"
+      }
+    ]
+  },
+  "resources": [
+    "file://./WORKSHOP_CONSTRAINTS.md"
+  ]
+}

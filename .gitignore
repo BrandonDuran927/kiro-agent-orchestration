@@ -1,0 +1,43 @@
+# ---- Secrets & Terraform state (NEVER commit) ----
+# Variable files that may hold the organizer key or other secrets
+*.tfvars
+*.auto.tfvars
+!terraform/example.tfvars
+
+# Terraform state contains secrets/account details in plaintext
+*.tfstate
+*.tfstate.*
+
+# Terraform working dirs, lock, crash logs
+**/.terraform/
+*.tfstate.lock.info
+crash.log
+crash.*.log
+
+# Plan output can embed sensitive values (covers tfplan, tfplan.bin, *.tfplan)
+*.tfplan
+tfplan*
+*.tfplan.bin
+
+# Packaged Lambda / build artifacts
+build/
+*.zip
+
+# ---- Stray session/export artifacts from the workshop ----
+login
+Usersbrandon.json
+participant-pack.json
+
+# ---- Python ----
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+*.egg-info/
+
+# ---- OS / editor noise ----
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/

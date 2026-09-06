@@ -1,0 +1,4 @@
+# Runtime dependencies for the Feedback Lambda.
+# boto3 is provided by the AWS Lambda Python runtime; pinned here for local
+# packaging/reference. It is imported lazily so unit tests do not require it.
+boto3==1.34.144

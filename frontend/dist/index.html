@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Workshop Feedback Portal</title>
+  <meta name="description" content="Submit and review workshop feedback." />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to main content</a>
+
+  <header class="site-header">
+    <div class="container">
+      <h1>Workshop Feedback Portal</h1>
+      <p class="tagline">Share your thoughts about the workshop.</p>
+    </div>
+  </header>
+
+  <nav class="tabs container" aria-label="Views">
+    <button
+      type="button"
+      id="tab-submit"
+      class="tab is-active"
+      role="tab"
+      aria-selected="true"
+      aria-controls="panel-submit"
+    >
+      Submit feedback
+    </button>
+    <button
+      type="button"
+      id="tab-review"
+      class="tab"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-review"
+    >
+      Organizer review
+    </button>
+  </nav>
+
+  <main id="main" class="container">
+    <!-- ============================ ATTENDEE SUBMISSION ============================ -->
+    <section
+      id="panel-submit"
+      class="panel"
+      role="tabpanel"
+      aria-labelledby="tab-submit"
+    >
+      <h2>Submit your feedback</h2>
+      <p class="help-text">
+        No account or personal information is required. All fields are validated
+        by the server before your feedback is saved.
+      </p>
+
+      <form id="feedback-form" novalidate>
+        <div class="field">
+          <label for="workshopId">
+            Workshop identifier <span class="required" aria-hidden="true">*</span>
+          </label>
+          <input
+            type="text"
+            id="workshopId"
+            name="workshopId"
+            maxlength="200"
+            autocomplete="off"
+            required
+            aria-required="true"
+            aria-describedby="workshopId-hint workshopId-error"
+          />
+          <p id="workshopId-hint" class="hint">
+            The name or code of the workshop (up to 200 characters).
+          </p>
+          <p id="workshopId-error" class="field-error" role="alert" hidden></p>
+        </div>
+
+        <div class="field">
+          <fieldset
+            class="rating-fieldset"
+            aria-describedby="rating-hint rating-error"
+          >
+            <legend>
+              Overall rating <span class="required" aria-hidden="true">*</span>
+            </legend>
+            <p id="rating-hint" class="hint">1 = worst, 5 = best.</p>
+            <div class="rating-options" role="radiogroup" aria-label="Rating from 1 to 5">
+              <!-- Radio inputs injected by JS to keep markup DRY -->
+            </div>
+            <p id="rating-error" class="field-error" role="alert" hidden></p>
+          </fieldset>
+        </div>
+
+        <div class="field">
+          <label for="comment">Comment (optional)</label>
+          <textarea
+            id="comment"
+            name="comment"
+            rows="4"
+            maxlength="1000"
+            autocomplete="off"
+            aria-describedby="comment-hint comment-error"
+          ></textarea>
+          <p id="comment-hint" class="hint">
+            Optional. Up to 1000 characters.
+            <span id="comment-count" aria-live="polite">0 / 1000</span>
+          </p>
+          <p id="comment-error" class="field-error" role="alert" hidden></p>
+        </div>
+
+        <div class="actions">
+          <button type="submit" id="submit-btn" class="btn btn-primary">
+            Submit feedback
+          </button>
+          <span id="submit-spinner" class="spinner" hidden aria-hidden="true"></span>
+        </div>
+
+        <!-- Form-level status region: success / error -->
+        <div
+          id="submit-status"
+          class="status-region"
+          role="status"
+          aria-live="polite"
+          hidden
+        ></div>
+      </form>
+    </section>
+
+    <!-- ============================ ORGANIZER REVIEW ============================ -->
+    <section
+      id="panel-review"
+      class="panel"
+      role="tabpanel"
+      aria-labelledby="tab-review"
+      hidden
+    >
+      <h2>Organizer review</h2>
+      <p class="help-text">
+        Enter the organizer access key to load submitted feedback. The key is
+        used only for this request and is never stored in the page or its files.
+      </p>
+
+      <form id="review-form" novalidate>
+        <div class="field">
+          <label for="organizerKey">Organizer access key</label>
+          <input
+            type="password"
+            id="organizerKey"
+            name="organizerKey"
+            autocomplete="off"
+            aria-describedby="organizerKey-hint"
+          />
+          <p id="organizerKey-hint" class="hint">
+            Provided to organizers out-of-band. Sent as the
+            <code>X-Organizer-Key</code> header.
+          </p>
+        </div>
+        <div class="actions">
+          <button type="submit" id="load-btn" class="btn btn-primary">
+            Load feedback
+          </button>
+          <span id="review-spinner" class="spinner" hidden aria-hidden="true"></span>
+        </div>
+      </form>
+
+      <div
+        id="review-status"
+        class="status-region"
+        role="status"
+        aria-live="polite"
+        hidden
+      ></div>
+
+      <div id="review-results" aria-live="polite">
+        <!-- Count summary + feedback list injected by JS -->
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container">
+      <p>Proof of concept &middot; Workshop Feedback Portal</p>
+    </div>
+  </footer>
+
+  <script src="config.js"></script>
+  <script src="api.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

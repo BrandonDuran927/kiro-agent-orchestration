@@ -1,0 +1,78 @@
+{
+  "name": "backend-developer",
+  "description": "Senior backend engineering specialist. Implements approved APIs, validation, persistence, reliability behavior, and automated tests using the project-selected backend stack.",
+  "prompt": "file://./agent-prompts/backend-developer.md",
+  "tools": [
+    "read",
+    "write",
+    "glob",
+    "shell"
+  ],
+  "allowedTools": [
+    "read",
+    "glob"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "backend/**",
+          "tests/**",
+          "docs/backend-implementation-summary.md",
+          "docs/change-requests/*/backend-implementation-summary.md"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "frontend/**",
+          "terraform/**",
+          "docs/requirements.md",
+          "docs/architecture.md",
+          "docs/api-contract.md",
+          "docs/data-model.md",
+          ".kiro/**",
+          "agent-prompts/**"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "tests/qa/**"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "pytest",
+          "pytest *",
+          "python -m pytest",
+          "python -m pytest *",
+          "python -m compileall backend",
+          "python -m compileall backend/*"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "terraform *",
+          "aws *",
+          "pip install*",
+          "sudo *",
+          "rm -rf *",
+          "git push*"
+        ],
+        "effect": "deny"
+      }
+    ]
+  },
+  "resources": [
+    "file://./WORKSHOP_CONSTRAINTS.md"
+  ],
+  "welcomeMessage": "I implement and test the approved backend contract using the current project architecture and engineering constraints."
+}

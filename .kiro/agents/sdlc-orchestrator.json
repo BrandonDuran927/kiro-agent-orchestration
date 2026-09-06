@@ -1,0 +1,36 @@
+{
+  "name": "sdlc-orchestrator",
+  "description": "Coordinates specialist agents through the defined SDLC without performing specialist work itself.",
+  "prompt": "file://./agent-prompts/sdlc-orchestrator.md",
+  "tools": ["read", "subagent"],
+  "allowedTools": ["read"],
+  "toolsSettings": {
+    "subagent": {
+      "availableAgents": [
+        "business-analyst",
+        "solution-architect",
+        "frontend-developer",
+        "backend-developer",
+        "qa-engineer",
+        "security-reviewer",
+        "devops-engineer"
+      ],
+      "trustedAgents": [
+        "business-analyst",
+        "solution-architect",
+        "frontend-developer",
+        "backend-developer",
+        "qa-engineer",
+        "security-reviewer",
+        "devops-engineer"
+      ]
+    }
+  },
+  "resources": [
+    "file://./SDLC_WORKFLOW.md",
+    "file://./WORKSHOP_CONSTRAINTS.md",
+    "file://./BUSINESS_REQUEST.md"
+  ],
+  "keyboardShortcut": "ctrl+o",
+  "welcomeMessage": "Describe your delivery or change request and I'll coordinate the SDLC specialists."
+}

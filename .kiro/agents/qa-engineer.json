@@ -1,0 +1,66 @@
+{
+  "name": "qa-engineer",
+  "description": "Senior independent QA specialist. Uses requirements traceability and risk-based testing to validate integrated behavior and report reproducible defects with remediation owners.",
+  "prompt": "file://./agent-prompts/qa-engineer.md",
+  "tools": [
+    "read",
+    "write",
+    "shell"
+  ],
+  "allowedTools": [
+    "read"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "docs/qa-report.md",
+          "docs/change-requests/*/qa-report.md",
+          "tests/qa/**"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "frontend/**",
+          "backend/**",
+          "terraform/**",
+          "docs/requirements.md",
+          "docs/architecture.md",
+          "docs/api-contract.md",
+          "docs/data-model.md",
+          ".kiro/**",
+          "agent-prompts/**"
+        ],
+        "effect": "deny"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "pytest",
+          "pytest *",
+          "python -m pytest",
+          "python -m pytest *"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "shell",
+        "match": [
+          "terraform apply*",
+          "terraform destroy*",
+          "aws *",
+          "rm -rf *",
+          "sudo *",
+          "git push*"
+        ],
+        "effect": "deny"
+      }
+    ]
+  },
+  "resources": [
+    "file://./WORKSHOP_CONSTRAINTS.md"
+  ]
+}

@@ -1,0 +1,43 @@
+{
+  "name": "security-reviewer",
+  "description": "Senior application and cloud security specialist. Performs risk-based review of frontend, backend, data flows, IAM, infrastructure-as-code, and trust boundaries without modifying implementation.",
+  "prompt": "file://./agent-prompts/security-reviewer.md",
+  "tools": [
+    "read",
+    "write"
+  ],
+  "allowedTools": [
+    "read"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "docs/security-report.md",
+          "docs/change-requests/*/security-report.md"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "frontend/**",
+          "backend/**",
+          "terraform/**",
+          "tests/**",
+          "docs/requirements.md",
+          "docs/architecture.md",
+          "docs/api-contract.md",
+          "docs/data-model.md",
+          ".kiro/**",
+          "agent-prompts/**"
+        ],
+        "effect": "deny"
+      }
+    ]
+  },
+  "resources": [
+    "file://./WORKSHOP_CONSTRAINTS.md"
+  ]
+}

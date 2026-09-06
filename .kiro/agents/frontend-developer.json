@@ -1,0 +1,46 @@
+{
+  "name": "frontend-developer",
+  "description": "Senior frontend engineering specialist. Implements approved browser UI and API integration with accessibility, responsive design, secure rendering, and maintainable client-side practices.",
+  "prompt": "file://./agent-prompts/frontend-developer.md",
+  "tools": [
+    "read",
+    "write",
+    "glob"
+  ],
+  "allowedTools": [
+    "read",
+    "glob"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "frontend/**",
+          "docs/frontend-implementation-summary.md",
+          "docs/change-requests/*/frontend-implementation-summary.md"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "backend/**",
+          "terraform/**",
+          "tests/**",
+          "docs/requirements.md",
+          "docs/architecture.md",
+          "docs/api-contract.md",
+          "docs/data-model.md",
+          ".kiro/**",
+          "agent-prompts/**"
+        ],
+        "effect": "deny"
+      }
+    ]
+  },
+  "resources": [
+    "file://./WORKSHOP_CONSTRAINTS.md"
+  ],
+  "welcomeMessage": "I implement the approved frontend experience and API integration within the current project architecture and constraints."
+}

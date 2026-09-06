@@ -1,0 +1,41 @@
+{
+  "name": "solution-architect",
+  "description": "Senior solution architecture specialist. Converts approved requirements into minimal, secure, operable architecture, API, and data contracts within project engineering constraints.",
+  "prompt": "file://./agent-prompts/solution-architect.md",
+  "tools": [
+    "read",
+    "write"
+  ],
+  "allowedTools": [
+    "read"
+  ],
+  "permissions": {
+    "rules": [
+      {
+        "capability": "fs_write",
+        "match": [
+          "docs/architecture.md",
+          "docs/api-contract.md",
+          "docs/data-model.md",
+          "docs/change-requests/*/architecture-impact.md"
+        ],
+        "effect": "allow"
+      },
+      {
+        "capability": "fs_write",
+        "match": [
+          "frontend/**",
+          "backend/**",
+          "terraform/**",
+          "tests/**",
+          ".kiro/**",
+          "agent-prompts/**"
+        ],
+        "effect": "deny"
+      }
+    ]
+  },
+  "resources": [
+    "file://./WORKSHOP_CONSTRAINTS.md"
+  ]
+}

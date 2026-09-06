@@ -1,0 +1,17 @@
+# Terraform state & working dirs
+.terraform/
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+crash.log
+crash.*.log
+
+# Plan output / packaged artifacts
+*.tfplan
+build/
+lambda.zip
+
+# Local variable files that may hold secrets (e.g. organizer_key)
+*.auto.tfvars
+*.tfvars
+!example.tfvars
